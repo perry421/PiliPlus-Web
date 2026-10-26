@@ -1,0 +1,17 @@
+{
+  "id": "./",
+  "name": "PiliPlus Web · B 站轻入口",
+  "short_name": "PiliPlus Web",
+  "description": "一个面向 iPhone Safari 的轻量 B 站网页入口。非官方项目。",
+  "lang": "zh-CN",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0b0d12",
+  "theme_color": "#0b0d12",
+  "icons": [
+    { "src": "./assets/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "./assets/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

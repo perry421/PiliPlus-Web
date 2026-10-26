@@ -1,0 +1,8 @@
+{
+  "name": "piliplus-web",
+  "version": "0.1.0",
+  "private": true,
+  "description": "An unofficial, iOS-Safari-friendly Bilibili web companion shell.",
+  "scripts": { "test": "node --test tests/*.test.cjs", "check": "node --check core.js && node --check app.js && node --check sw.js && npm test" },
+  "engines": { "node": ">=20" }
+}
