@@ -42,5 +42,26 @@ else
 fi
 
 git push -u origin "$BRANCH"
-echo "Push complete. Check the Pages workflow at: https://github.com/${REPO}/actions/workflows/pages.yml"
-echo "The site is not declared deployed until the workflow succeeds."
+echo "Push complete. Waiting for the Pages workflow for commit $(git rev-parse --short HEAD)…"
+HEAD_SHA="$(git rev-parse HEAD)"
+RUN_ID=""
+for _ in {1..30}; do
+  RUN_ID="$(gh run list --repo "$REPO" --workflow pages.yml --branch "$BRANCH" --limit 10 --json databaseId,headSha --jq ".[] | select(.headSha == \"$HEAD_SHA\") | .databaseId" 2>/dev/null | head -n 1 || true)"
+  if [[ -n "$RUN_ID" ]]; then break; fi
+  sleep 1
+done
+if [[ -n "$RUN_ID" ]]; then
+  if ! gh run watch "$RUN_ID" --repo "$REPO" --exit-status; then
+    echo "ERROR: GitHub Actions failed. Inspect: https://github.com/${REPO}/actions/runs/${RUN_ID}" >&2
+    exit 1
+  fi
+  SITE_URL="$(gh api "repos/${REPO}/pages" --jq .html_url 2>/dev/null || true)"
+  if [[ -n "$SITE_URL" ]]; then
+    echo "GitHub Pages deployment succeeded: $SITE_URL"
+  else
+    echo "Workflow succeeded, but the Pages URL could not be read automatically. Check Settings → Pages for the published URL."
+  fi
+else
+  echo "No workflow run found for this commit yet. Check: https://github.com/${REPO}/actions/workflows/pages.yml"
+  echo "Do not consider the site deployed until the workflow succeeds."
+fi
