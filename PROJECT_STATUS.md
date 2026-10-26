@@ -3,7 +3,7 @@
 ## 2026-10-26
 
 - MVP implemented as a dependency-free static PWA for iOS Safari.
-- Node syntax checks and 15 automated tests pass.
+- Node syntax checks and 16 automated tests pass.
 - Verified at a 390 x 844 mobile viewport without horizontal overflow.
 - Verified search/link parsing, Bilibili redirects, theme persistence, local favorites, and Service Worker shell fallback.
 - Fixed the favorites empty state so the `hidden` attribute always wins over component display styles.
