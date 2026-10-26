@@ -28,7 +28,13 @@ test('service worker caches only the app shell, not user/account content', () =>
   const sw = read('sw.js');
   assert.match(sw, /APP_SHELL/);
   assert.match(sw, /url\.origin !== self\.location\.origin/);
+  assert.match(sw, /CACHE_NAME = 'piliplus-web-shell-v2'/);
+  assert.match(sw, /fetch\(request\).*\.catch\(async \(\) => \(await caches\.match\(request\)\)/s);
   assert.doesNotMatch(sw, /document\.cookie|localStorage|Authorization/);
+});
+
+test('hidden elements stay hidden regardless of component display styles', () => {
+  assert.match(read('styles.css'), /\[hidden\]\{display:none!important\}/);
 });
 
 test('GitHub Pages workflow runs app tests and uploads only _site', () => {

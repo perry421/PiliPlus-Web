@@ -1,5 +1,5 @@
 'use strict';
-const CACHE_NAME = 'piliplus-web-shell-v1';
+const CACHE_NAME = 'piliplus-web-shell-v2';
 const APP_SHELL = [
   './', './index.html', './styles.css', './core.js', './app.js',
   './manifest.webmanifest', './assets/icon.svg', './assets/icon-192.png', './assets/icon-512.png'
@@ -21,8 +21,8 @@ self.addEventListener('fetch', (event) => {
     }).catch(async () => (await caches.match('./index.html')) || Response.error()));
     return;
   }
-  event.respondWith(caches.match(request).then((cached) => cached || fetch(request).then((response) => {
+  event.respondWith(fetch(request).then((response) => {
     if (response.ok) { const copy = response.clone(); caches.open(CACHE_NAME).then((cache) => cache.put(request, copy)); }
     return response;
-  })));
+  }).catch(async () => (await caches.match(request)) || Response.error()));
 });
