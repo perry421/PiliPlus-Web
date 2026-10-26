@@ -34,6 +34,12 @@ else
   gh repo create "$REPO" --public --description "Unofficial iOS-Safari-friendly Bilibili web companion shell"
 fi
 
+# A new repository needs a Pages site before configure-pages can query it.
+if ! gh api "repos/${REPO}/pages" >/dev/null 2>&1; then
+  gh api --method POST "repos/${REPO}/pages" -f build_type=workflow >/dev/null
+  echo "Enabled GitHub Pages with workflow builds."
+fi
+
 TARGET_URL="https://github.com/${REPO}.git"
 if git remote get-url origin >/dev/null 2>&1; then
   git remote set-url origin "$TARGET_URL"

@@ -8,7 +8,7 @@
 - Verified search/link parsing, Bilibili redirects, theme persistence, local favorites, and Service Worker shell fallback.
 - Fixed the favorites empty state so the `hidden` attribute always wins over component display styles.
 - Updated the Service Worker to cache version 2 and prefer fresh same-origin assets while falling back to the cache offline.
-- Remote GitHub repository and GitHub Pages deployment are pending publication from this checkout.
+- Published to `https://github.com/perry421/PiliPlus-Web` and `https://perry421.github.io/PiliPlus-Web/` on 2026-10-26.
 
 ## Known boundaries
 

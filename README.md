@@ -43,7 +43,7 @@ npm test
 
 ## 部署到 GitHub Pages
 
-若本地 GitHub CLI 已登录，可在项目目录直接运行 `./scripts/publish.sh`。脚本会先跑测试；在目标仓库不存在时尝试创建 `perry421/PiliPlus-Web` 并推送 `main`。创建仓库需要 GitHub CLI 具备相应权限。脚本不会声称部署已成功，仍需查看 Actions 运行结果。
+若本地 GitHub CLI 已登录，可在项目目录直接运行 `./scripts/publish.sh`。脚本会先跑测试；在目标仓库不存在时创建 `perry421/PiliPlus-Web`，启用 GitHub Pages workflow 构建，推送 `main` 并等待对应工作流。创建仓库和启用 Pages 需要 GitHub CLI 具备相应权限。脚本只有在 Actions 成功后才报告部署成功。
 
 手动部署步骤：
 

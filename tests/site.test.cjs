@@ -43,3 +43,8 @@ test('GitHub Pages workflow runs app tests and uploads only _site', () => {
   assert.match(workflow, /path: _site/);
   assert.match(workflow, /actions\/deploy-pages@v4/);
 });
+
+test('publish script enables Pages workflow builds for a new repository', () => {
+  const script = read('scripts/publish.sh');
+  assert.match(script, /gh api --method POST "repos\/\$\{REPO\}\/pages" -f build_type=workflow/);
+});
